@@ -1,27 +1,31 @@
-# SoundCloud Playlist Downloader & Converter
+# SoundCloud Playlist Downloader and Converter
 
-This Bash script downloads a SoundCloud playlist using [`soundcloud-dl`](https://github.com/) (make sure it's installed and in your PATH), converts the downloaded tracks to MP3 format using FFmpeg (with album art and metadata preserved), and renames the files in a smart way to avoid duplicating the artist name.
+This bash script downloads a SoundCloud playlist using `soundcloud-dl`, then converts the downloaded tracks to MP3 using `ffmpeg` while embedding metadata and preserving album art. It also builds output filenames in a smart format that avoids duplicate artist names.
 
 ## Features
 
-- **Download Tracks:** Downloads all tracks from a provided SoundCloud playlist URL.
-- **MP3 Conversion:** Converts non-MP3 files to MP3 format using FFmpeg with best-quality settings.
-- **Smart Filename Generation:** Constructs output filenames in the format:
+- **Download:** Uses `soundcloud-dl` to download all tracks from a specified SoundCloud playlist.
+- **Conversion:** Converts tracks to MP3 using `ffmpeg` with best-quality audio settings.
+- **Metadata:** Writes MP3 tags for artist, title, genre, and remixer.
+- **Smart Filenames:** Creates output files in the format:
   - `Artist - Title (Remixer).mp3`
-  - If the title already starts with the artist’s name, it avoids duplicating the artist.
-- **Metadata Tagging:** Writes MP3 tags for artist, title, genre, and remixer.
-- **Album Art Preservation:** Copies embedded album art (if present) during conversion.
-- **Flexible Options:** Supports flags to keep original files, perform conversion only, and enable verbose output.
-- **Progress Display:** Provides a progress counter during conversion when verbose mode is off.
+  
+  If the title already includes the artist name, the script avoids duplicating it.
+- **Album Art:** Preserves album art by mapping the video stream.
+- **Optional Flags:**
+  - `--keep-original`: Keeps the original (non-MP3) file after conversion (default is to remove it).
+  - `--convert-only`: Skips the download step and converts files in the existing directory.
+  - `--verbose`: Displays detailed progress and conversion information. Without this flag, only the new filename and a progress counter are printed.
 
-## Prerequisites
+## Requirements
 
-Before using this script, ensure you have the following installed and available in your system's PATH:
+- [soundcloud-dl](https://github.com/soundcloud-dl/soundcloud-dl) installed and available in your `PATH`.
+- [ffmpeg](https://ffmpeg.org/) installed and available in your `PATH`.
+- Bash shell
 
-- [soundcloud-dl](https://github.com/)  
-- [FFmpeg](https://ffmpeg.org/)
+## Installation
 
-For example, on macOS you can install FFmpeg via Homebrew:
-
-```bash
-brew install ffmpeg
+1. **Clone or download** this repository and save the script (e.g. `download_sc_playlist.sh`) to your local machine.
+2. **Make the script executable:**
+   ```bash
+   chmod +x download_sc_playlist.sh
